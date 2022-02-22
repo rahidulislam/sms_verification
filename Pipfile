@@ -5,6 +5,11 @@ name = "pypi"
 
 [packages]
 django = "*"
+crispy-bootstrap5 = "*"
+pyotp = "*"
+twilio = "*"
+requests = "*"
+python-decouple = "*"
 
 [dev-packages]
 

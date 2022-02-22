@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+<form action="" method="POST">
+    {% csrf_token %}
+    <img class="mb-4" src="{% static 'img/bootstrap-logo.svg' %}" alt="" width="72" height="57">
+    <h1 class="h3 mb-3 fw-normal">Please sign up</h1>
+
+    <div class="form-floating">
+      {{ form|crispy }}
+    </div>
+    
+
+    
+    <button class="w-100 btn btn-lg btn-primary mt-2" type="submit">Sign Up</button>
+    
+  </form>
+{% endblock content %}

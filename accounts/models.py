@@ -1,5 +1,6 @@
 from django.db import models
-from django.contrib.auth.models import BaseUserManager,AbstractBaseUser
+from django.contrib.auth.models import BaseUserManager,AbstractBaseUser,PermissionsMixin
+from django.utils.translation import gettext_lazy
 # Create your models here.
 
 class CustomUserManager(BaseUserManager):
@@ -25,10 +26,12 @@ class CustomUserManager(BaseUserManager):
         return self.create_user(email, password, **extra_fields)
 
 
-class CustomUser(AbstractBaseUser):
+class CustomUser(AbstractBaseUser,PermissionsMixin):
     email = models.EmailField(verbose_name="Email Address", max_length=255, unique=True)
-    phone_number = models.TextField(max_length=20)
-    is_active = models.BooleanField(default=True)
+    key = models.CharField(max_length=100, unique=True, blank=True)
+    is_staff = models.BooleanField(gettext_lazy('Staff status'), default=False)
+    is_superuser = models.BooleanField(gettext_lazy('Superuser status'), default=False)
+    is_active = models.BooleanField(gettext_lazy('Active'), default=True)
     is_verified = models.BooleanField(default=False)
     objects = CustomUserManager()
     USERNAME_FIELD = 'email'
